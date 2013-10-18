@@ -35,7 +35,7 @@ link_file tmux.conf
 if [ ! -e "$HOME/.oh-my-zsh" ]
 then
     echo "[INST] Installing oh-my-zsh"
-    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash -x
 else
     echo "[SKIP] oh-my-zsh is already installed"
 fi

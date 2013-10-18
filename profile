@@ -26,3 +26,24 @@ export LANGUAGE="en_US:en"
 export LC_MESSAGES="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
+
+# If no SSH agent is already running, start one now. Re-use sockets so we never
+# have to start more than one session.
+
+#export SSH_AUTH_SOCK=/home/maxence/.ssh-socket
+
+#   # No ssh-agent running
+#   rm -rf $SSH_AUTH_SOCK
+#   # >| allows output redirection to over-write files if no clobber is set
+#   ssh-agent -a $SSH_AUTH_SOCK >| /tmp/.ssh-script
+#   source /tmp/.ssh-script
+#   echo $SSH_AGENT_PID >| ~/.ssh-agent-pid
+ssh-add ~/.ssh/taf/id_rsa &>/dev/null
+ssh-add ~/.ssh/id_rsa &>/dev/null
+#   rm /tmp/.ssh-script
+
+export PATH=$PATH:$HOME/.vim/bundle/powerline/scripts/
+export PASSWORD_STORE_DIR=/home/maxence/repo/password5k
+export GNUPGHOME=$PASSWORD_STORE_DIR/g5kadmin_gnupg
+
+bash /home/maxence/.rvm/scripts/rvm

@@ -36,7 +36,7 @@
 " F5:  Previous buffer
 " F6:  Next buffer
 " F7:  Toggle paste mode
-" F8:  Run Flake8
+" F8:  Run SyntasticCheck
 " F9:  Toggle folds
 " F10: Run file (currently supported: python, bash, html)
 " F11: Reserved for fullscreen switching by WM or Terminal emulator
@@ -52,6 +52,10 @@
 " <Shift>Ins paste from system clipboard
 "
 " == General & interface
+
+" Some plugins are put in /usr/share/vim/addons, which isn't in default runtimepath
+set runtimepath=~/.vim,/usr/share/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vimcurrent,/usr/share/vim/vimfiles/after,/usr/share/vim/addons/after,~/.vim/after,/usr/share/vim/vim73
+
 
 set nocompatible
 filetype off
@@ -74,10 +78,12 @@ Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
 Bundle 'gg/python.vim'
 Bundle 'tpope/vim-rails'
+"snipmat and dependencies
 Bundle 'garbas/vim-snipmate'
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'honza/snipmate-snippets'
+Bundle 'honza/vim-snippets'
+
 Bundle 'nvie/vim-flake8'
 Bundle 'majutsushi/tagbar'
 Bundle 'walm/jshint.vim'
@@ -96,21 +102,47 @@ Bundle 'The-NERD-tree'
 let g:NERDTreeWinSize = 25
 let g:NERDTreeIgnore = ['^tags$', '^PYSMELLTAGS']
 
+Bundle 'scrooloose/nerdcommenter'
+
 Bundle 'scrooloose/syntastic'
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_auto_jump=0
+let g:syntastic_enable_highlighting=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_puppet_puppetlint_args='--no-80chars-check'
+map <buffer> <F8> :SyntasticCheck<CR>
 
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/powerline'
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_colorscheme = 'solarized'
+set rtp+=/home/maxence/.vim/bundle/powerline/powerline/bindings/vim
+
 
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#show_function_definition = 0
 let g:jedi#popup_on_dot = 0
 
+Bundle 'helino/vim-json'
+
+" tabular plugin to align lignes on some char
+Bundle 'godlygeek/tabular'
+"let g:tabular_loaded = 1
+" Colors
+Bundle 'altercation/vim-colors-solarized'
+
+"Colorize indent
+Bundle 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+
 filetype plugin indent on
 syntax on
+colorscheme ir_black
+
+
 
 " == User Interface
 set history=1000                    " Keep 1000 lines of history
@@ -137,7 +169,9 @@ set autoread                        " Autoreload changed files
 
 set t_Co=256
 set background=dark
-colorscheme molokai
+
+set cursorline
+hi CursorLine term=bold cterm=bold guibg=Grey40
 
 " == Identation and tabs
 set smartindent
@@ -155,7 +189,7 @@ set smartcase                       " Ignore case if search pattern is all lower
 set hlsearch                        " Highlight search terms
 nmap <silent> ,/ :nohlsearch<CR>
 set incsearch
-set gdefault                        " Search all occurrences by default
+"set gdefault                        " Search all occurrences by default
 
 set foldmethod=indent               " Indentation based folding
 set foldlevelstart=99               " Start editing with no fold closed
@@ -287,7 +321,9 @@ autocmd BufRead,BufNewFile *.wsgi setfiletype python
 " Remove trailing whitespace on save
 autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufRead *.py set errorformat=%f:%l:\ %m
-autocmd FileType python map <buffer> <F8> :call Flake8()<CR>
+
+" Don't warn for >80 char lines
+let g:syntastic_python_flake8_exe="flake8 --ignore=E501"
 if filereadable('./manage.py')
     autocmd FileType python set ft=python.django " For SnipMate
     autocmd FileType html set ft=htmldjango.html " For SnipMate
@@ -305,7 +341,7 @@ autocmd FileType htmldjango setlocal ts=2 sts=2 sw=2 expandtab
 
 autocmd BufRead *.js set makeprg=jshint\ %
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript map <buffer> <F8> :w<CR>:JSHint<CR>
+"autocmd FileType javascript map <buffer> <F8> :w<CR>:JSHint<CR>
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
 
 autocmd BufNewFile,BufRead *.coffee setfiletype coffee
@@ -332,7 +368,7 @@ autocmd FileType php set ft=php.html
 autocmd FileType php set equalprg=php_beautifier\ -l\ \"Pear()\ ArrayNested()\"\ -s2
 autocmd FileType php noremap <C-M> :w!<CR>:!php %<CR> " Run script with php-cli
 autocmd FileType php noremap <S-F8> :!php -l %<CR> " php syntax check
-autocmd FileType php noremap <F8> :!phpcs %<CR>  " php CodeSniffer
+"autocmd FileType php noremap <F8> :!phpcs %<CR>  " php CodeSniffer
 " Shortcuts to php-docs
 autocmd FileType php inoremap <C-D> <ESC>:call PhpDocSingle()<CR>i
 autocmd FileType php nnoremap <C-D> :call PhpDocSingle()<CR>
@@ -349,7 +385,7 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 if has("gui_running")
     highlight SpellBad term=underline gui=undercurl guisp=Orange
-    set guifont=Menlo\ for\ Powerline\ 9
+    set guifont=Meslo\ for\ Powerline\ 9
     set background=dark
     colorscheme molokai
 endif
@@ -374,8 +410,8 @@ nmap <leader>f :filetype detect<CR>
 autocmd BufRead * silent! %s/[\r \t]\+$//
 autocmd BufEnter *.php :%s/[ \t\r]\+$//e
 
-map <silent> <A-Right> :tabnext<CR>
-map <silent> <A-Left> :tabprevious<CR>
+map <silent> <C-n> :tabnext<CR>
+map <silent> <C-p> :tabprevious<CR>
 noremap <silent> <C-Left> <C-T>
 noremap <silent> <C-Right> <C-]>
 
