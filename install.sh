@@ -31,6 +31,7 @@ link_file gitignore_global
 link_file hgrc
 link_file ackrc
 link_file tmux.conf
+link_file Xdefaults
 
 if [ ! -e "$HOME/.oh-my-zsh" ]
 then

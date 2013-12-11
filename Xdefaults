@@ -1,43 +1,88 @@
-URxvt*depth: 32
-URxvt*background: rgba:2000/2000/2000/eeee
-URxvt*foreground: #DEDEDE
+! {{{ URxvt
+URxvt.font:			xft:Source Code Pro for Powerline:pixelsize=11:antialias=true
+URxvt.boldFont:			xft:Source Code Pro for Powerline:bold:pixelsize=11:antialias=true
+URxvt.termName:			rxvt
+URxvt.title:			Terminal
 
-!! Monaco
-URxvt*font:             xft:Monaco for Powerline:regular:size=10
-URxvt*imFont:           xft:Monaco for Powerline:regular:size=10
-URxvt*boldFont:         xft:Monaco for Powerline:bold:size=10
-URxvt*italicFont:       xft:Monaco for Powerline:italic:size=10
-URxvt*boldItalicFont:   xft:Monaco for Powerline:bold:italic:size=10
+! Scroll
+URxvt.saveLines:		1024
+URxvt.scrollBar:		false
+URxvt.jumpScroll:		true
+URxvt.scrollTtyOutput:		false
+URxvt.scrollTtyKeypress:	true
+URxvt.scrollWithBuffer:		true
 
-URxvt*saveLines: 12000
-URxvt*scrollBar: false
-URxvt*scrollstyle: rxvt
-URxvt*perl-ext-common: default,matcher
-URxvt*urlLauncher: xdg-open
-URxvt*matcher.button: 1
-URxvt*colorUL: #86a2b2
-! black
-URxvt*color0  : #2E3436
-URxvt*color8  : #555753
-! red
-URxvt*color1  : #CC0000
-URxvt*color9  : #EF2929
-! green
-URxvt*color2  : #4E9A06
-URxvt*color10 : #8AE234
-! yellow
-URxvt*color3  : #C4A000
-URxvt*color11 : #FCE94F
-! blue
-URxvt*color4  : #3465A4
-URxvt*color12 : #729FCF
-! magenta
-URxvt*color5  : #75507B
-URxvt*color13 : #AD7FA8
-! cyan
-URxvt*color6  : #06989A
-URxvt*color14 : #34E2E2
-! white
-URxvt*color7  : #D3D7CF
-URxvt*color15 : #EEEEEC
+! Cursor
+URxvt.cursorUnderline:		false
+URxvt.cursorBlink:		true
 
+! URI
+URxvt.perl-ext-common:		default,matcher
+URxvt.matcher.button:		1
+URxvt.urlLauncher:		firefox
+
+! Colors
+!black
+URxvt*color0:      #000000
+URxvt*color8:      #555753
+!red
+URxvt*color1:      #CC0000
+URxvt*color9:      #EF2929
+!green
+URxvt*color2:      #4E9A06
+URxvt*color10:     #8AE234
+!yellow
+URxvt*color3:      #C4A000
+URxvt*color11:     #FCE94F
+!blue
+URxvt*color4:      #3465A4
+URxvt*color12:     #729FCF
+!magenta
+URxvt*color5:      #75507B
+URxvt*color13:     #AD7FA8
+!cyan
+URxvt*color6:      #06989A
+URxvt*color14:     #34E2E2
+!white
+URxvt*color7:      #D3D7CF
+URxvt*color15:     #ECEDEE
+
+! Display
+URxvt*background: 	rgba:2222/2222/2222/dddd
+URxvt*depth: 		32
+URxvt.foreground:       #ffffff
+URxvt.geometry:    	80x25
+! }}}
+
+! {{{ Xterm
+XTerm*Geometry:    	100x25
+XTerm*foreground:	#DDDDDD
+XTerm*background:	#000000
+XTerm*FaceName:		DejaVu Sans Mono:pixelsize=10:antialias=true
+XTerm*metaSendsEscape:  true
+XTerm*loginShell:	true
+XTerm*title:            Terminal
+XTerm*utmpInhibit:      False
+XTerm*on2Clicks:        word
+XTerm*on3Clicks:        line
+XTerm*on4Clicks:        page
+XTerm*on5Clicks:        all
+XTerm*saveLines:        1024
+XTerm*bellIsUrgent:     true
+XTerm*color0:           #111111
+XTerm*color1:           #CC4444
+XTerm*color2:           #44CC44
+XTerm*color3:           #CC8844
+XTerm*color4:           #4488CC
+XTerm*color5:           #CC44CC
+XTerm*color6:           #44CC88
+XTerm*color7:           #CCCCCC
+XTerm*color8:           #444444
+XTerm*color9:           #FF4444
+XTerm*color10:          #44FF44
+XTerm*color11:          #FF8844
+XTerm*color12:          #4488FF
+XTerm*color13:          #FF44FF
+XTerm*color14:          #44FF88
+XTerm*color15:          #FFFFFF
+! }}}
