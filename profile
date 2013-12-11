@@ -26,6 +26,7 @@ export LANGUAGE="en_US:en"
 export LC_MESSAGES="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LC_COLLATE="en_US.UTF-8"
+export HISTSIZE=30000
 
 # If no SSH agent is already running, start one now. Re-use sockets so we never
 # have to start more than one session.
@@ -47,3 +48,6 @@ export PASSWORD_STORE_DIR=/home/maxence/repo/password5k
 export GNUPGHOME=$PASSWORD_STORE_DIR/g5kadmin_gnupg
 
 bash /home/maxence/.rvm/scripts/rvm
+
+alias rfinte="restfully -c ~/.restfully/api.integration.bonfire.grid5000.fr.yml"
+alias rfprod="restfully -c ~/.restfully/api.bonfire-project.eu.yml"

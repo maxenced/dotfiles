@@ -54,7 +54,7 @@
 " == General & interface
 
 " Some plugins are put in /usr/share/vim/addons, which isn't in default runtimepath
-set runtimepath=~/.vim,/usr/share/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vimcurrent,/usr/share/vim/vimfiles/after,/usr/share/vim/addons/after,~/.vim/after,/usr/share/vim/vim73
+set runtimepath=~/.vim,/usr/share/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vimcurrent,/usr/share/vim/vimfiles/after,/usr/share/vim/addons/after,~/.vim/after,/usr/share/vim/vim74
 
 
 set nocompatible
