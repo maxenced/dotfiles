@@ -104,6 +104,6 @@ bindkey "\e0A" up-line-or-local-history
 bindkey "\e0B" down-line-or-local-history]
 
 export LC_ALL=fr_FR.UTF-8
-source ~/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+source /home/maxence/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 source ~/.profile
 
