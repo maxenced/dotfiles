@@ -36,12 +36,13 @@ export HISTSIZE=30000
 #   source /tmp/.ssh-script
 #   echo $SSH_AGENT_PID >| ~/.ssh-agent-pid
 ssh-add ~/.ssh/taf/id_rsa &>/dev/null
+ssh-add ~/.ssh/id_rsa_claranet &>/dev/null
 ssh-add ~/.ssh/id_rsa &>/dev/null
 #   rm /tmp/.ssh-script
 
 export PATH=$PATH:$HOME/.vim/bundle/powerline/scripts/
 export PASSWORD_STORE_DIR=/home/maxence/repo/password5k
 export GNUPGHOME=$PASSWORD_STORE_DIR/g5kadmin_gnupg
-
+alias s="ssh ssh.typhon.net"
 #bash /home/maxence/.rvm/scripts/rvm
 

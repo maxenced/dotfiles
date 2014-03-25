@@ -1,24 +1,25 @@
 #!/usr/bin/env bash
 function link_file {
-    source="${PWD}/$1"
-    target="${HOME}/.${1}"
+source="${PWD}/$1"
+target="${HOME}/.${1}"
 
-    if [ -e "${target}" ]
+if [ -e "${target}" ]
+then
+    if [ "_$(readlink ${target})" == "_${source}" ]
     then
-        if [ "_$(readlink ${target})" == "_${source}" ]
-        then
-            echo "[SKIP] Existing target ${target}, skipping file $1"
-            return
-        else
-            backup=$target.backup$(date +%s)
-            echo "[BCKP] Saving backup of exising file ${target} as ${backup}"
-            mv $target $backup
-        fi
+        echo "[SKIP] Existing target ${target}, skipping file $1"
+        return
+    else
+        backup=$target.backup$(date +%s)
+        echo "[BCKP] Saving backup of exising file ${target} as ${backup}"
+        mv $target $backup
     fi
-    echo "[ OK ] Creating link to ${source}"
-    ln -sf ${source} ${target}
+fi
+echo "[ OK ] Creating link to ${source}"
+ln -sf ${source} ${target}
 }
 
+sudo apt-get install git vim zsh curl python-pip htop rxvt-unicode
 link_file vim
 link_file vimrc
 link_file profile
@@ -40,6 +41,16 @@ then
 else
     echo "[SKIP] oh-my-zsh is already installed"
 fi
+
+if [ ! -d "$HOME/.vim/bundle/vundle" ];then
+    echo "[INST] Installing vundle"
+    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+else
+    echo "[SKIP] vundle already installed"
+fi
+
+echo "[INST] Installing vim plugins"
+vim +PluginInstall +qall
 
 mkdir -p ~/.config/terminator
 if [ ! -e ~/.config/terminator/config ]; then
