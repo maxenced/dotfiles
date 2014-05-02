@@ -129,5 +129,23 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+alias s="ssh ssh.typhon.net"
+#alias p="pwgen 12 1"
+function p {
+    echo -n "$* : " >> .typhonpass
+    pa=$(pwgen 12 1)
+    echo $pa >> .typhonpass
+    echo $pa
+}
 
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 

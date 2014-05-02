@@ -10,7 +10,8 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="alanpeabody"
+#ZSH_THEME="alanpeabody"
+ZSH_THEME="agnoster"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -104,6 +105,39 @@ bindkey "\e0A" up-line-or-local-history
 bindkey "\e0B" down-line-or-local-history]
 
 export LC_ALL=fr_FR.UTF-8
-source /home/maxence/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+source /home/maxence/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
 source ~/.profile
+export KEYTIMEOUT=1
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 
+function p (){
+    echo -n "$* : " >> .typhonpass
+    pa=$(pwgen 12 1)
+    echo $pa >> .typhonpass
+    echo $pa
+}
+
+#tmux new
+## ssh wrapper that rename current tmux window to the hostname of the
+# remote host.
+ssh() {
+    # Do nothing if we are not inside tmux or ssh is called without arguments
+    if [[ $# == 0 || -z $TMUX ]]; then
+        command ssh $@
+        return
+    fi
+    # The hostname is the last parameter (i.e. ${(P)#})
+    local remote=${${(P)#}%.*}
+    local old_name="$(tmux display-message -p '#W')"
+    local renamed=0
+    # Save the current name
+    if [[ $remote != -* ]]; then
+        renamed=1
+        tmux rename-window $remote
+    fi
+    command ssh $@
+    if [[ $renamed == 1 ]]; then
+        tmux rename-window "$old_name"
+    fi
+}

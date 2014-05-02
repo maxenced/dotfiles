@@ -84,6 +84,9 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'honza/vim-snippets'
 
+let g:snips_author = 'Maxence Dunnewind'
+let g:snips_email = 'tech@typhon.com'
+
 Bundle 'nvie/vim-flake8'
 Bundle 'majutsushi/tagbar'
 Bundle 'walm/jshint.vim'
@@ -104,6 +107,7 @@ let g:NERDTreeIgnore = ['^tags$', '^PYSMELLTAGS']
 
 Bundle 'scrooloose/nerdcommenter'
 
+Bundle 'rodjek/vim-puppet'
 Bundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open=0
 let g:syntastic_error_symbol='✗'
@@ -140,7 +144,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 filetype plugin indent on
 syntax on
-colorscheme ir_black
+colorscheme custom
 
 
 

@@ -24,25 +24,18 @@ if [ -d "$HOME/bin" ] ; then
 fi
 export HISTSIZE=30000
 
-# If no SSH agent is already running, start one now. Re-use sockets so we never
-# have to start more than one session.
-
-#export SSH_AUTH_SOCK=/home/maxence/.ssh-socket
-
-#   # No ssh-agent running
-#   rm -rf $SSH_AUTH_SOCK
-#   # >| allows output redirection to over-write files if no clobber is set
-#   ssh-agent -a $SSH_AUTH_SOCK >| /tmp/.ssh-script
-#   source /tmp/.ssh-script
-#   echo $SSH_AGENT_PID >| ~/.ssh-agent-pid
-ssh-add ~/.ssh/taf/id_rsa &>/dev/null
-ssh-add ~/.ssh/id_rsa_claranet &>/dev/null
-ssh-add ~/.ssh/id_rsa &>/dev/null
-#   rm /tmp/.ssh-script
 
 export PATH=$PATH:$HOME/.vim/bundle/powerline/scripts/
 export PASSWORD_STORE_DIR=/home/maxence/repo/password5k
-export GNUPGHOME=$PASSWORD_STORE_DIR/g5kadmin_gnupg
 alias s="ssh ssh.typhon.net"
+#alias p="pwgen 12 1"
 #bash /home/maxence/.rvm/scripts/rvm
 
+if [ -n "$GNOME_KEYRING_PID" ]; then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+    export GNOME_KEYRING_CONTROL
+    export GPG_AGENT_INFO
+fi
+
+alias tmux="tmux -2"

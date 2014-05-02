@@ -1,5 +1,7 @@
 startup_message off
 defutf8 on
+terminfo rxvt-unicode ti@:te@:
+term screen-256color
 hardstatus alwayslastline "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%d.%m.%Y %{w}| %{g}%l %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
 #start login shells (read .profile)
 defshell -$SHELL
@@ -7,11 +9,11 @@ defshell -$SHELL
 ## screen -t NameOfScreen ScreenNumber ShellCommand
 screen -t parasub 0
 screen -t parasub 1
- 
+
 select 0
 ## change meta-key (ctrl-a)
 # escape ^gg
 startup_message off
- 
+
 bindkey ^[Od prev
 bindkey ^[Oc next
