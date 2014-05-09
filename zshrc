@@ -118,6 +118,16 @@ function p (){
     echo $pa
 }
 
+function taf () {
+    if [ -z "$1" -o -z "$2" ];then
+        echo "Usage : taf host message"
+    else
+        h=$1
+        shift
+        echo  "[$(date +'%Y-%m-%d %H:%M') - $h] : $* " >> ~/.logtaf
+    fi
+}
+
 #tmux new
 ## ssh wrapper that rename current tmux window to the hostname of the
 # remote host.
