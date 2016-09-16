@@ -31,11 +31,13 @@ alias s="ssh ssh.typhon.net"
 #alias p="pwgen 12 1"
 #bash /home/maxence/.rvm/scripts/rvm
 
-if [ -n "$GNOME_KEYRING_PID" ]; then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-    export GNOME_KEYRING_CONTROL
-    export GPG_AGENT_INFO
+if [ -n "$DESKTOP_SESSION" ];then
+    # No point to start gnome-keyring-daemon if ssh-agent is not up
+    if [ -n "$SSH_AGENT_PID" ];then
+        eval $(gnome-keyring-daemon --start)
+        export SSH_AUTH_SOCK export GPG_AGENT_INFO
+        export GNOME_KEYRING_CONTROL
+    fi
 fi
-
 alias tmux="tmux -2"
+

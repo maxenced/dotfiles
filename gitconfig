@@ -1,6 +1,6 @@
 [user]
-    name = Maxence Dunnewind
-    email = maxence.dunnewind@inria.fr
+	name = Maxence Dunnewind
+	email = maxence@typhon.com
 
 [color]
     diff = auto
@@ -9,7 +9,7 @@
     ui = auto
 
 [push]
-    default = matching
+	default = current
 
 [core]
     editor = vim

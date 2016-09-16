@@ -113,7 +113,7 @@ bindkey '^R' history-incremental-search-backward
 
 function p (){
     echo -n "$* : " >> .typhonpass
-    pa=$(pwgen 12 1)
+    pa=$(pwgen -nc 12 1)
     echo $pa >> .typhonpass
     echo $pa
 }
@@ -128,6 +128,11 @@ function taf () {
     fi
 }
 
+function v () {
+
+    vncviewer -passwd ~/.vnc/passwd $1.typhon.admin:$2
+
+}
 #tmux new
 ## ssh wrapper that rename current tmux window to the hostname of the
 # remote host.

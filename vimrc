@@ -73,37 +73,56 @@ Bundle 'AutoComplPop'
 Bundle 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
 Bundle 'gg/python.vim'
 Bundle 'tpope/vim-rails'
 "snipmat and dependencies
-Bundle 'garbas/vim-snipmate'
+"Bundle 'garbas/vim-snipmate'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips","pp-puppet-snippets"]
+
+
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'honza/vim-snippets'
+Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
+Plugin 'git@git.adm.fr.clara.net:PP-scripts/pp-puppet-snippets.git'
 
 let g:snips_author = 'Maxence Dunnewind'
 let g:snips_email = 'tech@typhon.com'
 
-Bundle 'nvie/vim-flake8'
+"Bundle 'nvie/vim-flake8'
 Bundle 'majutsushi/tagbar'
 Bundle 'walm/jshint.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'reinh/vim-makegreen'
-Bundle 'strycore/django.vim'
+"Bundle 'strycore/django.vim'
 Bundle 'tomasr/molokai'
 Bundle 'tpope/vim-fugitive'
-Bundle 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_guide_size = 4
 
-Bundle 'kien/ctrlp.vim'
-let g:ctrlp_working_path_mode = 2
+"Plugin 'https://github.com/robbles/logstash.vim.git'
+"Plugin 'https://github.com/keith/rspec.vim.git'
+"Bundle 'https://github.com/pld-linux/vim-syntax-vcl.git'
+
+"Bundle 'kien/ctrlp.vim'
+"let g:ctrlp_working_path_mode = 2
 
 Bundle 'The-NERD-tree'
 let g:NERDTreeWinSize = 25
 let g:NERDTreeIgnore = ['^tags$', '^PYSMELLTAGS']
+
+" YCM config
+let g:ycm_key_list_select_completion = ["<C-TAB>", "<Down>"]
+let g:ycm_key_list_previous_completion = ["<C-S-TAB>", "<Up>"]
+
+" Ultisnips config
+let g:UltiSnipsSnippetDirectories=["UltiSnips","pp-puppet-snippets"]
+let g:SuperTabDefaultCompletionType = "<C-Tab>"
 
 Bundle 'scrooloose/nerdcommenter'
 
@@ -115,13 +134,13 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_auto_jump=0
 let g:syntastic_enable_highlighting=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_puppet_puppetlint_args='--no-80chars-check'
+let g:syntastic_puppet_puppetlint_args='--no-140chars-check'
 map <buffer> <F8> :SyntasticCheck<CR>
 
-Bundle 'Lokaltog/powerline'
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme = 'solarized'
-set rtp+=/home/maxence/.vim/bundle/powerline/powerline/bindings/vim
+"Bundle 'Lokaltog/powerline'
+"let g:Powerline_symbols = 'fancy'
+"let g:Powerline_colorscheme = 'solarized'
+"set rtp+=/home/maxence/.vim/bundle/powerline/powerline/bindings/vim
 
 
 Bundle 'davidhalter/jedi-vim'
@@ -144,7 +163,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 filetype plugin indent on
 syntax on
-colorscheme custom
+colorscheme molokai
 
 
 
@@ -396,7 +415,7 @@ endif
 
 " Highlight long lines
 if exists('+colorcolumn')
-    set colorcolumn=80
+    set colorcolumn=120
     highlight ColorColumn ctermbg=darkgray guibg=#4E4E4E
 else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -435,6 +454,18 @@ inoremap <C-l> <Right>
 
 " Tagbar configuration
 map <silent> <F4> :TagbarToggle<CR>
+" Adding this to .vimrc causes vim to treat ’:’ as part of the keyword for tag navigation purposes.
+set tags=./tags;~/Repositories/typhon-puppet-recipes/
+au FileType puppet setlocal isk+=:
+let g:tagbar_type_puppet = {
+    \ 'ctagstype': 'puppet',
+    \ 'kinds': [
+        \'c:class',
+        \'s:site',
+        \'n:node',
+        \'d:definition'
+      \]
+    \}
 
 " json formating
 map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
@@ -454,3 +485,5 @@ set pastetoggle=<F7>
 cmap w!! w !sudo tee % > /dev/null
 
 set path=$PWD/**
+colorscheme molokai
+
