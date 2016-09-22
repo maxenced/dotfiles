@@ -49,6 +49,15 @@ else
     echo "[SKIP] vundle already installed"
 fi
 
+if [ ! -d "$HOME/.gdb" ];then
+    echo "[INST] Installing gdbinit"
+    git clone https://github.com/gdbinit/Gdbinit.git ~/.gdb
+else
+    echo "[SKIP] gdbinit already installed"
+fi
+
+ln -sf ~/.gdb/gdbinit ~/.gdbinit
+
 echo "[INST] Installing vim plugins"
 vim +PluginInstall +qall
 

@@ -5,13 +5,33 @@ export BROWSER='firefox' # Default web browser
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+export XDG_CONFIG_HOME=~/.config
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="alanpeabody"
-ZSH_THEME="agnoster"
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_MODE='awesome-fontconfig'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon vi_mode dir vcs)
+POWERLEVEL9K_OS_ICON_BACKGROUND='008'
+POWERLEVEL9K_DIR_HOME_BACKGROUND='250'
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='250'
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='250'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='214'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='214'
+
+# Vi-Mode
+POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND='197'
+POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='236'
+POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND='202'
+POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='236'
+
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -105,7 +125,8 @@ bindkey "\e0A" up-line-or-local-history
 bindkey "\e0B" down-line-or-local-history]
 
 export LC_ALL=fr_FR.UTF-8
-source /home/maxence/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+#source /home/maxence/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+#. /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
 source ~/.profile
 export KEYTIMEOUT=1
 bindkey -v

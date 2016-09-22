@@ -89,7 +89,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips","pp-puppet-snippets"]
 Bundle 'tomtom/tlib_vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'honza/vim-snippets'
-Bundle 'godlygeek/tabular'
+"Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Plugin 'git@git.adm.fr.clara.net:PP-scripts/pp-puppet-snippets.git'
 
